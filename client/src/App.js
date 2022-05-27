@@ -4,6 +4,7 @@ import React, {useState} from 'react';
 import {UserContext} from './UserContext';
 import Chat from './components/chat/Chat';
 import Home from './components/home/Home';
+import Navbar from './components/layout/Navbar';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -11,6 +12,7 @@ function App() {
     <Router>
       <div className="App">
         <UserContext.Provider value={{user, setUser}}>
+          <Navbar/>
           <Routes>
             <Route exact path='/' element={<Home/>} />
             <Route exact path='/chat' element={<Chat/>} />
