@@ -7,7 +7,10 @@ const io = socketio(http);
 const PORT = process.env.PORT || 5000
 
 io.on('connection', (socket) => {
-  console.log('a user connected');
+  console.log(socket.id);
+  socket.on('create-room', name=> {
+    console.log('Then room name received is ', name);
+  });
 });
 
 http.listen(PORT, () => {
