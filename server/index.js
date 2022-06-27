@@ -18,6 +18,10 @@ const Room = require('./models/Room');
 
 io.on('connection', (socket) => {
   console.log(socket.id);
+  Room.find().then(result => {
+    console.log('output-rooms', result)
+    socket.emit('output-rooms', result)
+  })
   socket.on('create-room', name=> {
     // console.log('Then room name received is ', name);
     const room = new Room({name});
