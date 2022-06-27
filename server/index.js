@@ -4,6 +4,8 @@ const http = require('http').createServer(app);
 const socketio = require('socket.io');
 const io = socketio(http);
 
+const mongoDB = "mongodb+srv://ckmobile:ckmobile123@cluster0.fykanxv.mongodb.net/?retryWrites=true&w=majority";
+
 const {addUser, getUser, removeUser} = require('./helper');
 
 const PORT = process.env.PORT || 5000
