@@ -29,10 +29,7 @@ const Chat = () => {
     }
     return (
         <div>
-            <div>{room_id} {room_name}</div>
-            <h1>Chat {JSON.stringify(user)}</h1>
-            <pre>{JSON.stringify(messages, null, '\t')}</pre>
-            {/* <Messages messages={messages} user_id={user.id} /> */}
+            <Messages messages={messages} user_id={user.id} />
             <form action="" onSubmit={sendMessage}>
                 <input type="text"
                     value={message}
