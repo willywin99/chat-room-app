@@ -19,5 +19,14 @@ const userSchema = new mongoose.Schema({
         minlength: [6, 'The password should be at least 6 characters long']
     },
 })
+
+userSchema.pre('save', function(next) {
+    console.log('before save', this);
+    next();
+});
+userSchema.post('save', function(doc, next) {
+    console.log('after save', doc);
+    next();
+});
 const User = mongoose.model('user', userSchema);
 module.exports = User;
