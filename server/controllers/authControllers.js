@@ -1,4 +1,5 @@
 module.exports.signup = (req, res) => {
+  console.log('req.body', req.body);
   res.send('signup');
 }
 
