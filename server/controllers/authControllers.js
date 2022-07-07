@@ -7,8 +7,9 @@ module.exports.signup = async (req, res) => {
     const user = await User.create({name, email, password});
     res.status(201).json({user});
   } catch (error) {
-    console.log(error);
-    res.status(400).send('Fail to create user');
+    console.log(`error message: ${error.message}`);
+    console.log(`error code: ${error.code}`);
+    // res.status(400).send('Fail to create user');
   }
 }
 
