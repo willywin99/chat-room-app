@@ -5,7 +5,7 @@ app.use(express.json());
 app.use(authRoutes);
 const http = require('http').createServer(app);
 const mongoose = require('mongoose');
-const socketio = require('socket.io')
+const socketio = require('socket.io');
 const io = socketio(http);
 const mongoDB = "mongodb+srv://ckmobile:ckmobile123@cluster0.fykanxv.mongodb.net/?retryWrites=true&w=majority";
 mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true }).then(() => console.log('connected')).catch(err => console.log(err))
