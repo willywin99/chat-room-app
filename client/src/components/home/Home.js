@@ -91,9 +91,6 @@ const Home = () => {
                 </div>
             </div>
 
-            <Link to={'/chat'}>
-                <button>go to chat</button>
-            </Link>
         </div>
     )
 }
