@@ -18,8 +18,8 @@ function App() {
           credentials: 'include',
           headers: {'Content-Type': 'application/json'}
         });
-        const data = await res.json()
-        setUser(data)
+        const data = await res.json();
+        setUser(data);
       } catch (error) {
         console.log(error)
       }
