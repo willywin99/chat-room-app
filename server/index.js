@@ -11,8 +11,8 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 app.use(express.json());
-app.use(authRoutes);
 app.use(cookieParser());
+app.use(authRoutes);
 
 const http = require('http').createServer(app);
 const mongoose = require('mongoose');
@@ -78,6 +78,11 @@ io.on('connection', (socket) => {
             callback()
         })
 
+    })
+    socket.on('get-messages-history', room_id => {
+        Message.find({room_id}).then(result => {
+            socket.emit('output-messages', result)
+        })
     })
     socket.on('disconnect', () => {
         const user = removeUser(socket.id);
