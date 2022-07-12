@@ -9,6 +9,16 @@ const createJWT = id => {
 
 const alertError = (err) => {
   let errors = {name:'', email:'', password:''};
+
+  console.log('err message', err.message);
+  console.log('err code', err.code);
+
+  if (err.message === 'incorrect email') {
+    errors.email = 'This email not found';
+  }
+  if (err.message === 'incorrect password') {
+    errors.password = 'The password is incorrect';
+  }
   
   if (err.code === 11000) {
     errors.email = 'This email already registered';
@@ -37,8 +47,17 @@ module.exports.signup = async (req, res) => {
   }
 }
 
-module.exports.login = (req, res) => {
-  res.send('login');
+module.exports.login = async (req, res) => {
+  const {email, password} = req.body;
+  try {
+    const user = await User.login(email, password);
+    const token = createJWT(user._id);
+    res.cookie('jwt', token, {httpOnly: true, maxAge: maxAge * 1000})
+    res.status(201).json({user});
+  } catch (error) {
+    let errors = alertError(error);
+    res.status(400).json({errors});
+  }
 }
 
 module.exports.logout = (req, res) => {
