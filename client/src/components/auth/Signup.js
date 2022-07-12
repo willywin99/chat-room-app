@@ -9,16 +9,24 @@ const Signup = () => {
   const [passwordError, setPasswordError] = useState('');
   const submitHandler = async e => {
     e.preventDefault();
+    setEmailError('');
+    setNameError('');
+    setPasswordError('');
     console.log(name, email, password);
     try {
       const res = await fetch('http://localhost:5000/signup', {
         method: 'POST',
-        // credentials: 'include',
+        credentials: 'include',
         body: JSON.stringify({name, email, password}),
         headers: {'Content-Type': 'application/json'}
       });
       const data = await res.json();
       console.log(data);
+      if (data.errors) {
+        setEmailError(data.errors.email);
+        setNameError(data.errors.name);
+        setPasswordError(data.errors.password);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -35,7 +43,7 @@ const Signup = () => {
               value={name}
               onChange={e => setName(e.target.value)}
             />
-            <div className="name error red-text">Name is required</div>
+            <div className="name error red-text">{nameError}</div>
             <label htmlFor="name">Name</label>
           </div>
         </div>
@@ -48,7 +56,7 @@ const Signup = () => {
               value={email}
               onChange={e => setEmail(e.target.value)}
             />
-            <div className="email error red-text">Email is required</div>
+            <div className="email error red-text">{emailError}</div>
             <label htmlFor="email">Email</label>
           </div>
         </div>
@@ -61,7 +69,7 @@ const Signup = () => {
               value={password}
               onChange={e => setPassword(e.target.value)}
             />
-            <div className="password error red-text">Password is required</div>
+            <div className="password error red-text">{passwordError}</div>
             <label htmlFor="password">Password</label>
           </div>
         </div>

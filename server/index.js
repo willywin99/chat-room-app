@@ -5,7 +5,7 @@ const authRoutes = require('./routes/authRoutes');
 const cookieParser = require('cookie-parser');
 const corsOptions = {
     origin: 'http://localhost:3000',
-    credential: true,
+    credentials: true,
     optionSuccessStatus: 200
 }
 
